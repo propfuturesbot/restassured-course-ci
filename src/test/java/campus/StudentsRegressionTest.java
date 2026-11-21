@@ -28,7 +28,7 @@ public class StudentsRegressionTest {
     public void createReadDelete() {
         int id = given().spec(Campus.spec()).contentType(ContentType.JSON).body(newStudent(uniqueEmail()))
                 .when().post("/api/v1/students")
-                .then().statusCode(201).body("programmeCode", equalTo("CS"))
+                .then().statusCode(201).body("programmeCode", equalTo("CSC"))
                 .extract().path("id");
         given().spec(Campus.spec()).when().delete("/api/v1/students/" + id).then().statusCode(204);
         given().spec(Campus.spec()).when().get("/api/v1/students/" + id)
