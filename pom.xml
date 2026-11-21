@@ -38,6 +38,20 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <!-- the TestNG listener writes one result file per test into target/allure-results -->
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>2.35.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- a REST Assured filter that attaches every request and response to its test in the report -->
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-rest-assured</artifactId>
+      <version>2.35.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
       <version>3.0</version>
@@ -53,7 +67,16 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.6.1</version>
+        <!-- 3.5.6, not 3.6.1: surefire 3.6 runs TestNG through the JUnit Platform (testng-engine), and that
+             engine's discovery pass reports every test once more as "passed" to the Allure listener.
+             3.5.6 still runs TestNG with its own provider: one Allure result per test. -->
+        <version>3.5.6</version>
+      </plugin>
+      <plugin>
+        <!-- mvn allure:report turns target/allure-results into an HTML site -->
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>3.1.0</version>
       </plugin>
     </plugins>
   </build>
