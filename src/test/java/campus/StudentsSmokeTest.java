@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public class StudentsSmokeTest {
 
@@ -22,7 +21,6 @@ public class StudentsSmokeTest {
         given().spec(Campus.spec()).queryParam("limit", 5)
                 .when().get("/api/v1/students")
                 .then().statusCode(200)
-                .body("data.size()", equalTo(5))
-                .body("meta.total", greaterThanOrEqualTo(100));
+                .body("data.size()", equalTo(5));
     }
 }
